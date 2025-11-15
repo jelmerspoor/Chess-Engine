@@ -1,15 +1,15 @@
-class Board:
-    def __init__(self):
-        self.grid = [[0 for _ in range(8)] for _ in range(8)]
-        self.setup_pieces()
-    
-
     # Pawn: White = 1, Black = 7
     # Bishop: White = 2, Black = 8
     # Knight: White = 3, Black = 9
     # Rook: White = 4, Black = 10
     # Queen: White = 5, Black = 11
     # King: White = 6, Black = 12
+
+class Board:
+    def __init__(self):
+        self.grid = [[0 for _ in range(8)] for _ in range(8)]
+        self.setup_pieces()
+
     def setup_pieces(self):
         for i in range(8):
             self.grid[1][i] = 7
@@ -25,3 +25,4 @@ class Board:
         for row in self.grid:
             print(row)
         print()
+

@@ -1,8 +1,10 @@
-from board import Board  # Import the Board class from board.py
+from board import Board
+from game import Game
 
 def main():
     board = Board()
-    board.print_board()
+    game = Game(board)
+    game.start()
 
 if __name__ == "__main__":
     main()

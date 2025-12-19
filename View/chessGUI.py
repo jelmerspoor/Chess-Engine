@@ -67,6 +67,64 @@ class ChessGUI:
             tags="highlight"
         )
 
+    def showPromotionScreen(self, turn):
+        piece = None
+
+        def choose(name):
+            nonlocal piece
+            match name:
+                case "Queen":
+                    piece = 5 if turn == 0 else 11
+                case "Rook":
+                    piece = 4 if turn == 0 else 10
+                case "Bishop":
+                    piece = 2 if turn == 0 else 8
+                case "Knight":
+                    piece = 3 if turn == 0 else 9
+            window.destroy()
+
+        window = tk.Toplevel()
+        window.title("Promote pawn")
+        window.geometry("300x100")
+        window.grab_set()
+
+        for name in [("Queen"), ("Rook"), ("Bishop"), ("Knight")]:
+            btn = tk.Button(window, text=name, command=lambda n=name: choose(n))
+            btn.pack(side="left", expand=True)
+
+        window.wait_window()
+        return piece 
+    
+    def showCheckmateScreen(self, turn):
+        winner = "Black" if turn == 0 else "White"
+
+        window = tk.Toplevel()
+        window.title("Checkmate")
+        window.geometry("300x100")
+        window.grab_set()
+
+        label = tk.Label(window, text=f"Checkmate! {winner} wins!")
+        label.pack(pady=10)
+
+        btn = tk.Button(window, text="OK", command=window.destroy)
+        btn.pack(pady=5)
+
+        window.wait_window()
+    
+    def showStalemateScreen(self):
+        window = tk.Toplevel()
+        window.title("Stalemate")
+        window.geometry("300x100")
+        window.grab_set()
+
+        label = tk.Label(window, text=f"Stalemate! It is a draw!")
+        label.pack(pady=10)
+
+        btn = tk.Button(window, text="OK", command=window.destroy)
+        btn.pack(pady=5)
+
+        window.wait_window()
+
     def click_handler(self, event):
         if event.num == 1:
             self.game.handleClick(event.x, event.y)
